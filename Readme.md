@@ -4,6 +4,6 @@ A tool to monitor nodes in a clusters.
 
 Features:
 
-* Dump cpu usage by users and nodes.
-* Dump memory usage by user and nodes.
-* Minimal webserver. No need for Admin rights.
+* Dump Cpu usage by users and nodes.
+* Dump Memory usage by user and nodes.
+* Minimal webserver. No needs for Admin rights.
