@@ -1,0 +1,1 @@
+* probenodes become a Zombie process. Enhance pid management on SIGTERM

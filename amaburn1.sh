@@ -32,5 +32,16 @@ wait
 # print own CPU usage after all spawned processes completed
 top -b -n 1 -u "$OWN" | awk -v user=$OWN "$KPT"
 
-# Get average Load
-cat /proc/loadavg | awk '{print $1}'
+
+if [ "$TASK" == "mem" ]; then
+    # Get average Swap
+    swp=$(free -m | grep Swap | awk '{print $3}')
+    echo "scale=1; $swp / 1000" | bc -l
+else
+    # Get average Load
+    cat /proc/loadavg | awk '{print $1}'
+fi
+
+# Get swap usage by process
+# confident ? see smem...
+#for file in /proc/*/status ; do awk '/VmSwap|Name/{printf $2 " " $3}END{ print ""}' $file; done | sort -k 2 -n -r 
