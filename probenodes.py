@@ -100,7 +100,11 @@ class ProbeNodes(object):
             for _row, elt in enumerate(users):
                 u = elt.split()
                 uname = u[0]
-                row = self.users.index(uname)
+                try:
+                    row = self.users.index(uname)
+                except ValueError:
+                    print('uname error : %s, passing...' % (uname))
+                    continue
                 try:
                     load = self.op_load(float(u[_ont.index(task)]))
                 except:
