@@ -20,7 +20,8 @@ except ImportError:
 conf = dict(
     username = 'adulac',
     private_key = os.path.join(os.path.expanduser('~'), '.ssh/id_rsa'),
-    hosts = ['racer', 'tiger', 'victory', 'fuzzy', 'zombie', 'corona', 'macks', 'hertog'], # Could'n use racer.imag.fr ?
+    hosts = ['racer', 'tiger', 'victory', 'fuzzy', 'zombie', 'hertog'],
+    #hosts = ['racer', 'tiger', 'victory', 'fuzzy', 'zombie', 'corona', 'macks', 'hertog'],
 )
 
 _md_ext = [ 'headerid', 'sane_lists', 'smart_strong', 'extra', 'footnotes',
@@ -67,12 +68,13 @@ class ProbeNodes(object):
                 shell = spur.SshShell(hostname=_host,
                                       username=self.username,
                                       private_key_file=self.private_key,
-                                      missing_host_key=spur.ssh.MissingHostKey.auto_add)
+                                      missing_host_key=spur.ssh.MissingHostKey.auto_add,
+                                      shell_type=spur.ssh.ShellTypes.minimal)
                 with shell:
                     mesg = shell.run(self.script).output
                     self.shells[host] = shell
             except spur.ssh.ConnectionError as error:
-                print(error.original_traceback)
+                print("host `%s' error: %s" % (host,str( error.original_traceback)[-100:].replace('\n','')))
                 mesg = 'null'
             finally:
                 results[host] = {'output':mesg}
