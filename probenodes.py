@@ -20,8 +20,8 @@ except ImportError:
 conf = dict(
     username = 'adulac',
     private_key = os.path.join(os.path.expanduser('~'), '.ssh/id_rsa'),
-    hosts = ['racer', 'tiger', 'victory', 'fuzzy', 'zombie', 'hertog'],
-    #hosts = ['racer', 'tiger', 'victory', 'fuzzy', 'zombie', 'corona', 'macks', 'hertog'],
+    #hosts = ['racer', 'tiger', 'victory', 'fuzzy', 'zombie', 'hertog'],
+    hosts = ['racer', 'tiger', 'victory', 'fuzzy', 'zombie', 'hertog', 'corona', 'macks'],
 )
 
 _md_ext = [ 'headerid', 'sane_lists', 'smart_strong', 'extra', 'footnotes',
