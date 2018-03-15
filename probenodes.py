@@ -142,14 +142,17 @@ class ProbeNodes(object):
         else:
             print(table, file=sys.stdout)
 
+        return table
+
     def loop(self, ts=None):
         from markdown import markdown
         markdown_extra = partial(lambda p, x: markdown(x, p), [ 'markdown.extensions.%s'%(ext) for ext in _md_ext])
         tasks = ['cpu', 'mem']
         while True:
             for t in tasks:
-                self.dump(task=t, file='pb_%s'%t)
+                t =self.dump(task=t, file='pb_%s'%t)
                 #self.dump(task=t, file='pb_%s'%t, wrap=markdown_extra)
+                print(t)
 
     @staticmethod
     def html():
@@ -180,7 +183,7 @@ if __name__ == '__main__':
     pb = ProbeNodes(conf)
 
     if conf.get('task'):
-        pb.dump(conf['task'])
+        t = pb.dump(conf['task'])
     else:
         pb.loop()
 
