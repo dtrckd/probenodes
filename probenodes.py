@@ -84,7 +84,13 @@ class ProbeNodes(object):
         hosts = self.hosts
         headers = self.headers
         task = self.task
-        self.users = [u.split()[0] for u in list(filter(None, r[hosts[0]]['output'].decode('utf8').split('\n')))]
+        try:
+            self.users = [u.split()[0] for u in list(filter(None, r[hosts[0]]['output'].decode('utf8').split('\n')))]
+        except Exception as e:
+            print(e)
+            print(r[hosts[0]]['output'])
+            raise (e)
+
         # __remove extras information__
         self.users = self.users[:-1]
         table = np.zeros((len(self.users), len(hosts)))
